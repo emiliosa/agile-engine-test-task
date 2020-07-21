@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  client:
+    build: ./web
+    ports:
+      - 3000:3000
+    volumes:
+      - ./web:/usr/src/app
+      - /usr/src/app/node_modules
+    tty: true
+
+  api:
+    build: ./account-api
+    ports:
+      - 8888:8888
+    volumes:
+      - ./account-api:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+    tty: true
