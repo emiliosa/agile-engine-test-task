@@ -1,7 +1,8 @@
 import {
   IsNotEmpty,
   IsNumber,
-  IsEnum
+  IsEnum,
+  isEnum
 } from 'class-validator';
 
 enum TransactionType {
@@ -11,7 +12,8 @@ enum TransactionType {
 
 export class TransactionDTO {
   @IsNotEmpty()
-  readonly type: string;
+  @IsEnum(TransactionType)
+  readonly type: TransactionType;
 
   @IsNotEmpty()
   @IsNumber({ maxDecimalPlaces: 2, allowInfinity: false, allowNaN: false })
